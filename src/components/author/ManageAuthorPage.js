@@ -38,13 +38,13 @@ export class ManageAuthorPage extends React.Component {
     let formIsValid = true;
     let errors = {};
 
-    if (this.state.author.firstName.length < 1) {
-      errors.title = 'Author must have a first name. ';
+    if (!this.state.author.firstName || this.state.author.firstName.length < 1) {
+      errors.firstNameTitle = 'Author must have a first name. ';
       formIsValid = false;
     }
 
-    if (this.state.author.lastName.length < 1) {
-      errors.title = errors.title  + 'Author must have a last name. ';
+    if (!this.state.author.lastName || this.state.author.lastName.length < 1) {
+      errors.lastNameTitle = 'Author must have a last name. ';
       formIsValid = false;
     }
 
@@ -109,7 +109,7 @@ function getAuthorById(authors, id) {
 function mapStateToProps(state, ownProps) {
   const authorId = ownProps.params.id; // from the path `/author/:id`
 
-  let author = {id: '', firsName: '', lastName: ''};
+  let author = {id: '', firstName: '', lastName: ''};
 
   if (authorId && state.authors.length > 0) {
     author = getAuthorById(state.authors, authorId);

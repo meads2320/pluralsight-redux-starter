@@ -6,16 +6,16 @@ export function loadAuthorsSuccess(authors) {
   return {type: types.LOAD_AUTHORS_SUCCESS, authors};
 }
 
-export function createAuthorSuccess(authors) {
-  return {type: types.CREATE_AUTHOR_SUCCESS, authors};
+export function createAuthorSuccess(author) {
+  return {type: types.CREATE_AUTHOR_SUCCESS, author};
 }
 
-export function updateAuthorSuccess(authors) {
-  return {type: types.UPDATE_AUTHOR_SUCCESS, authors};
+export function updateAuthorSuccess(author) {
+  return {type: types.UPDATE_AUTHOR_SUCCESS, author};
 }
 
-export function deleteAuthorSuccess(authors) {
-  return {type: types.DELETE_AUTHOR_SUCCESS, authors};
+export function deleteAuthorSuccess(author) {
+  return {type: types.DELETE_AUTHOR_SUCCESS, author};
 }
 
 
@@ -35,6 +35,7 @@ export function saveAuthor(author) {
   return function (dispatch, getState) {
     dispatch(beginAjaxCall());
     return AuthorApi.saveAuthor(author).then(author => {
+      console.log(author);
       author.id ? dispatch(updateAuthorSuccess(author)) :
         dispatch(createAuthorSuccess(author));
     }).catch(error => {

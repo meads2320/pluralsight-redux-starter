@@ -10,7 +10,7 @@ class AuthorsPage extends React.Component {
         super(props,context);
         this.redirectToAddAuthorPage = this.redirectToAddAuthorPage.bind(this);
     }
-    
+
     authorRow(author, index) {
         return <div key={index}>{author.title}</div>;
     }
@@ -40,8 +40,8 @@ AuthorsPage.propTypes = {
     actions: PropTypes.object.isRequired
 };
 
-function mapStateToProps(state,ownProps) { 
-    return { 
+function mapStateToProps(state,ownProps) {
+    return {
         authors: state.authors
     };
 }
