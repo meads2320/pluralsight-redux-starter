@@ -7,7 +7,6 @@ export default function authorReducer(state = initialState.authors, action) {
       return action.authors;
     case types.CREATE_AUTHOR_SUCCESS:
 
-    console.log(action);
       return [
         ...state,
         Object.assign({}, action.author)
@@ -18,7 +17,10 @@ export default function authorReducer(state = initialState.authors, action) {
         ...state.filter(author => author.id !== action.author.id),
         Object.assign({}, action.author)
       ];
-
+  case types.DELETE_AUTHOR_SUCCESS:
+      return [
+        ...state.filter(author => author.id !== action.author.id)
+      ];
     default:
       return state;
   }

@@ -17,6 +17,7 @@ export class ManageAuthorPage extends React.Component {
 
         this.updateAuthorState = this.updateAuthorState.bind(this);
         this.saveAuthor = this.saveAuthor.bind(this);
+        this.deleteAuthor = this.deleteAuthor.bind(this);
 
     }
 
@@ -52,6 +53,15 @@ export class ManageAuthorPage extends React.Component {
     return formIsValid;
   }
 
+  deleteAuthor() {
+     this.props.actions.deleteAuthor(this.state.author)
+      .then(() => this.redirectDelete())
+      .catch(error => {
+        toastr.error(error);
+      });
+
+  }
+
   saveAuthor(event){
       event.preventDefault();
 
@@ -75,11 +85,17 @@ export class ManageAuthorPage extends React.Component {
     this.context.router.push('/authors');
   }
 
+  redirectDelete() {
+    toastr.success('Author deleted');
+    this.context.router.push('/authors');
+  }
+
   render() {
     return (
       <AuthorForm
         onChange={this.updateAuthorState}
         onSave={this.saveAuthor}
+        onDelete={this.deleteAuthor}
         author={this.state.author}
         errors={this.state.errors}
         saving={this.state.saving}
